@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <style>
+        div {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <%- include('../header/loggedinheader.ejs') %>
+
+    <%if (viewFor == 'emp') { %>
+    <h1> All Open positions: </h1>
+    <% } %>
+    <%if (viewFor == 'mgr') { %>
+    <h1> Your Open positions: </h1>
+    <% } %>
+
+    <%if (positions.length == 0) { %>
+    <p> Sorry but we donot have any open positions at the moment</p>
+    <% } %>
+    <%if (positions.length > 0) { %>
+    <table>
+        <tr>
+            <th>Project Name</th>
+            <th>Client Name</th>
+            <th>Role</th>
+            <th>Technical Expertise</th>
+            <th></th>
+        </tr>
+        <% positions.forEach(function(position){ %>
+        <tr>
+            <td><%= position.project %></td>
+            <td><%= position.client %></td>
+            <td><%= position.role %></td>
+            <td><%= position.technologies %></td>
+            <td><a href="/positions/view/<%= position.code %>"> View </a></td>
+        </tr>
+        <% }); %>
+    </table>
+    <% } %>
+
+    <%if (viewFor == 'mgr') { %>
+    <a href="/positions/create">Create new openings</a>
+    <% } %>
+</body>
+
+</html>

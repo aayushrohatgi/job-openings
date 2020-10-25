@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <style>
+        div {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <%- include('../header/loggedinheader.ejs') %>
+
+    <%if (typeof success != 'undefined' && success) { %>
+    <p>Opening created successfully</p>
+    <% } %>
+    <%if (typeof success != 'undefined' && !success) { %>
+    <p>Error creating opening</p>
+    <% } %>
+    <h1>Create An Opening: </h1>
+    <form action="/positions/create" method="POST">
+        <input type="hidden" name="code" value="<%= Math.random().toString(36).substring(7) %>">
+        <div>
+            <span>Project Name: </span>
+            <input type="text" placeholder="project" name="project" required />
+        </div>
+        <div>
+            <span>Client name: </span>
+            <input type="text" placeholder="client" name="client" required />
+        </div>
+        <div>
+            <span>Technologies: </span>
+            <input type="text" placeholder="technologies" name="technologies" required />
+        </div>
+        <div>
+            <span>Role: </span>
+            <input type="text" placeholder="role" name="role" required />
+        </div>
+        <div>
+            <span>Job Description: </span>
+            <input type="text" placeholder="description" name="description" required />
+        </div>
+        <input type="hidden" name="status" value="open">
+        <input type="hidden" name="author" value="<%= managerId %>">
+        <div>
+            <input type="submit" value="Create">
+        </div>
+    </form>
+    <%if (toList) { %>
+    <div>
+        <a href="/positions/list"> See all openings </a>
+    </div>
+    <% } %>
+</body>
+
+</html>

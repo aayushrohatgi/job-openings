@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <style>
+        div {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1><%= title %></h1>
+    <form action="/auth/register" method="POST">
+        <div>
+            <span>Firstname: </span>
+            <input type="text" placeholder="firstname" name="firstname" required />
+        </div>
+        <div>
+            <span>Lastname: </span>
+            <input type="text" placeholder="lastname" name="lastname" required />
+        </div>
+        <div>
+            <span>Username: </span>
+            <input type="text" placeholder="username" name="username" required />
+        </div>
+        <div>
+            <span>Password: </span>
+            <input type="password" placeholder="password" name="password" required />
+        </div>
+        <div>
+            <p>Role: </p>
+            <div>
+                <input type="radio" name="role" value="employee" required />
+                <span> Employee </span>
+            </div>
+            <div>
+                <input type="radio" name="role" value="manager" required />
+                <span> Manager </span>
+            </div>
+        </div>
+        <div>
+            <input type="submit">
+        </div>
+    </form>
+</body>
+
+</html>

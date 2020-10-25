@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <style>
+        div {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <%- include('../header/loggedinheader.ejs') %>
+
+    <h1>Opening: </h1>
+
+    <%if (viewFor == 'mgr') { %>
+    <form action="/positions/update" method="POST">
+        <input type="hidden" name="code" value="<%= position.code %>" />
+        <div>
+            <span>Project Name: </span>
+            <input type="text" value="<%= position.project %>" name="project" required />
+        </div>
+        <div>
+            <span>Client name: </span>
+            <input type="text" value="<%= position.client %>" name="client" required />
+        </div>
+        <div>
+            <span>Technologies: </span>
+            <input type="text" value="<%= position.technologies %>" name="technologies" required />
+        </div>
+        <div>
+            <span>Role: </span>
+            <input type="text" value="<%= position.role %>" name="role" required />
+        </div>
+        <div>
+            <span>Job Description: </span>
+            <input type="text" value="<%= position.description %>" name="description" required />
+        </div>
+        <div>
+            <span>Status: </span>
+            <input type="radio" name="status" value="open" <%if (position.status == 'open') { %> checked <% } %>> Open
+            <input type="radio" name="status" value="close" <%if (position.status == 'close') { %> checked <% } %>> Close
+        </div>
+        <input type="hidden" name="author" value="<%= position.author %>">
+        <div>
+            <input type="submit" value="Update">
+        </div>
+    </form>
+    <% } %>
+
+    <%if (viewFor == 'emp') { %>
+    <div>
+        <h2>Project Name: </h2>
+        <p><%= position.project %></p>
+        <h2>Client Name: </h2>
+        <p><%= position.client %></p>
+        <h2>Role: </h2>
+        <p><%= position.role %></p>
+        <h2>Expertize: </h2>
+        <p><%= position.technologies %></p>
+        <h2>Job Description: </h2>
+        <p><%= position.description %></p>
+        <h2>Manager: </h2>
+        <p><%= position.author %></p>
+    </div>
+    <div>
+        <%if (applied) { %>
+            <p> you have already applied for this opening</p>
+        <% } %>
+        <%if (!applied) { %>
+            <form action="/positions/apply/<%= position.code %>" method="POST">
+                <input type="submit" value="click to apply"/>
+            </form>
+        <% } %>
+    </div>
+    <% } %>
+
+    <div>
+        <a href="/positions/list"> See all openings </a>
+    </div>
+</html>
